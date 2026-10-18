@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Resume</title>
+    <style>
+        :root {
+            --primary-color: #4F46E5;
+            --hover-color: #4338CA;
+            --bg-color: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text-color: #1F2937;
+            --border-color: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            max-width: 600px;
+            width: 100%;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .file-input-container {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .file-input-container:hover {
+            border-color: var(--primary-color);
+        }
+
+        .file-input-container p {
+            margin: 0.5rem 0;
+            color: #6B7280;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            resize: vertical;
+            min-height: 150px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .file-details {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #F9FAFB;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .file-details.visible {
+            display: block;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem;
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #E5E7EB;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4B5563;
+        }
+
+        .file-text {
+            flex-grow: 1;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .file-size {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        .supported-formats {
+            font-size: 0.75rem;
+            color: #6B7280;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #4B5563;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 1rem;
+            background-color: #F3F4F6;
+            border-radius: 8px;
+        }
+
+        .welcome-message strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Your Resume</h1>
+        <div class="welcome-message">
+            <strong>Hello! I’m your CV Analysis Expert.</strong>
+            <p>
+                I’m here to help you enhance your resume and ensure it aligns
+                perfectly with your target job role. Upload your resume and include
+                the job description for tailored feedback to make your application
+                stand out.
+            </p>
+        </div>
+        <form method="POST" action="/" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="file-input-container" onclick="document.getElementById('file').click()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         style="margin: 0 auto; color: #6B7280;">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p>Click to upload or drag and drop</p>
+                    <input type="file" name="file" id="file"
+                           accept=".pdf,.docx,.png,.jpg,.jpeg" required>
+                </div>
+
+                <div class="file-details" id="fileDetails">
+                    <div class="file-info">
+                        <div class="file-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="file-text">
+                            <div class="file-name" id="fileName">No file selected</div>
+                            <div class="file-size" id="fileSize"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="supported-formats">
+                    Supported formats: PDF, DOCX, PNG, JPG, JPEG
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="job_description">
+                    Job Description <strong>(Required for More Accurate Feedback):</strong>
+                </label>
+                <textarea name="job_description" id="job_description"
+                          placeholder="Paste the job description here to get personalized feedback on your resume..."></textarea>
+            </div>
+
+            <button type="submit">Analyze Resume</button>
+        </form>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file');
+        const fileDetails = document.getElementById('fileDetails');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const dropZone = document.querySelector('.file-input-container');
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function updateFileInfo(file) {
+            if (file) {
+                fileName.textContent = file.name;
+                fileSize.textContent = formatFileSize(file.size);
+                fileDetails.classList.add('visible');
+            } else {
+                fileDetails.classList.remove('visible');
+            }
+        }
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                updateFileInfo(e.target.files[0]);
+            }
+        });
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor =
+                getComputedStyle(document.documentElement)
+                    .getPropertyValue('--primary-color').trim();
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor =
+                getComputedStyle(document.documentElement)
+                    .getPropertyValue('--border-color').trim();
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor =
+                getComputedStyle(document.documentElement)
+                    .getPropertyValue('--border-color').trim();
+
+            if (e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+                updateFileInfo(e.dataTransfer.files[0]);
+            }
+        });
+    </script>
+</body>
+</html>

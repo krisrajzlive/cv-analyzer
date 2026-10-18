@@ -1,0 +1,6 @@
+flask
+python-dotenv
+azure-ai-documentintelligence
+azure-storage-blob
+openai
+scikit-learn

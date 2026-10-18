@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Analysis Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2em;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 1em;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+      border-radius: 4px;
+    }
+
+    .status {
+      font-size: 1.2em;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .qualified {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .not-qualified {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    .feedback-section {
+      margin: 20px 0;
+      padding: 20px;
+      background-color: #fff3cd;
+      border: 1px solid #ffeeba;
+      border-radius: 4px;
+    }
+
+    .feedback-content {
+      white-space: pre-line;
+      margin-top: 10px;
+    }
+
+    .similarity-score {
+      font-size: 1.1em;
+      margin: 15px 0;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .back-link:hover {
+      background-color: #0056b3;
+    }
+
+    h1, h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Resume Analysis Result</h1>
+
+    {% if similarity is not none %}
+      <div class="similarity-score">
+        <strong>Match Score:</strong> {{ similarity }}
+      </div>
+
+      <p class="status {% if status == 'Qualified' %}qualified{% else %}not-qualified{% endif %}">
+        Status: {{ status }}
+      </p>
+
+      {% if status == "Not Qualified" %}
+        <p>
+          Your CV currently doesn't meet all the requirements for this position.
+          Please review the feedback below for improvements.
+        </p>
+
+        {% if feedback %}
+          <div class="feedback-section">
+            <h2>Expert Career Advisor and Resume Reviewer Suggestions</h2>
+            <div class="feedback-content">
+              {{ feedback }}
+            </div>
+          </div>
+        {% endif %}
+
+      {% elif status == "Qualified" %}
+        <p>
+          Congratulations! Your resume strongly aligns with the job requirements,
+          giving you an excellent chance of passing the ATS system for this position.
+        </p>
+        <p>{{ upload_status }}</p>
+      {% endif %}
+    {% endif %}
+
+    <h2>Extracted Resume Text</h2>
+    <pre>{{ text }}</pre>
+
+    <a href="/" class="back-link">&larr; Upload Another Resume</a>
+  </div>
+</body>
+</html>
